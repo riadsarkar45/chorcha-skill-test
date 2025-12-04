@@ -1,10 +1,17 @@
 import Header from "../components/Header";
 import ProductImage from "../../public/image.png"
+import { useState } from "react";
 
 const ProductDetail = () => {
+    const [selectSize, setSelectedSize] = useState("")
     const colors = ["RED", "BLUE", "GREEN"];
     const size = ["S", "M", "XL"];
     const variant = ["USA", "China", "Bangladesh"]
+
+    const handleSelectSize = (selectedSize) => {
+        setSelectedSize(selectedSize)
+        console.log(selectSize);
+    }
     return (
         <div>
             <Header />
@@ -26,7 +33,7 @@ const ProductDetail = () => {
                         <div className="flex gap-2">
                             {
                                 colors.map((cols, i) =>
-                                    <button className="border bg-green-500 bg-opacity-10 p-1 rounded-md" key={i}>{cols}</button>
+                                    <button  onClick={() => handleSelectSize(cols)} className={`${selectSize === cols ? 'bg-green-500 bg-opacity-10 ' : ''} border p-1 rounded-md`} key={i}>{cols}</button>
                                 )
                             }
                         </div>
@@ -35,21 +42,41 @@ const ProductDetail = () => {
                         <h2>Size</h2>
                         <div className="flex gap-2">
                             {
-                                size.map((cols, i) =>
-                                    <button className="border bg-green-500 bg-opacity-10 p-1 rounded-md"  key={i}>{cols}</button>
+                                size.map((size, i) =>
+                                    <button className="border bg-green-500 bg-opacity-10 p-1 rounded-md" key={i}>{size}</button>
                                 )
                             }
                         </div>
                     </div>
-                    <div className="mb-2">
+                    <div className="mb-2 ">
                         <h2>Variant</h2>
                         <div className="gap-2 flex">
                             {
                                 variant.map((cols, i) =>
-                                    <button className="border bg-green-500 bg-opacity-10 p-1 rounded-md"   key={i}>{cols}</button>
+                                    <button className="border bg-green-500 bg-opacity-10 p-1 rounded-md" key={i}>{cols}</button>
                                 )
                             }
                         </div>
+                    </div>
+                    <div className="mb-2 ">
+                        <div className="gap-2 flex">
+                            <button className="bg-green-600 bg-opacity-20 border border-green-600 p-2 rounded-lg w-full">Add to cart</button>
+                            <button className="bg-green-600 p-2 rounded-lg w-full">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="bg-gray-50 border rounded-md p-2">
+                    <h2 className="uppercase border-b mb-3 border-black-200">delivery information</h2>
+                    <div className="mb-4">
+                        <h2>Delivery Fee</h2>
+                        <small>70TK</small>
+                    </div>
+                    <div className="mb-4">
+                        <h2>Estimate Time</h2>
+                        <small>3-4 Days</small>
+                    </div>
+                    <div className="mb-4">
+                        <h2>Cash On Delivery Available</h2>
                     </div>
                 </div>
             </div>
